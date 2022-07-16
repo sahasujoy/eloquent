@@ -20,6 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+//:::::::::::::::::::::::::::::::::::::::: CRUD OPERATION :::::::::::::::::::::::::::::::::::::::::::::::::::::
 Route::get('/add-post', [PostController::class, 'addPost'])->name('post.add');
 
 Route::Post('/create-post', [PostController::class, 'createPost'])->name('post.create');
@@ -36,15 +38,17 @@ Route::post('/update-post', [PostController::class, 'updatePost'])->name('post.u
 
 Route::get('/add-user', [UserController::class, 'insertRecord'])->name('user.add');
 
+Route::get('/add-friend', [UserController::class, 'insertFriend'])->name('user.friend.add');
 
 
 
-//:::::::::::::::::::::::::::::::::::: Relation Routes ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+//:::::::::::::::::::::::::::::::::::: RELATION ROUTES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Route::get('/get-phone/{id}', [UserController::class, 'fetchPhoneByUser'])->name('user.getphone'); // One to One
 
 Route::get('/get-address/{id}', [UserController::class, 'fetchAddressByUser'])->name('user.getaddress'); // One to One
 
-Route::get('/get-profile/{id}', [UserController::class, 'fetchProfileByUser'])->name('user.ge')
+Route::get('/get-profile/{id}', [UserController::class, 'fetchProfileByUser'])->name('user.getprofile'); // One to One
 
 Route::get('/get-device/{id}', [UserController::class, 'fetchDeviceByUser'])->name('user.getdevice'); // One to Many
 
@@ -58,6 +62,9 @@ Route::get('/get-user-by-address/{id}', [UserController::class, 'fetchUserByAddr
 
 Route::get('/get-user-by-image/{id}', [UserController::class, 'fetchUserByImage'])->name('image.getuser'); // One to One - Reverse
 
+Route::get('/get-friends/{id}', [UserController::class, 'fetchFriendsByUser'])->name('user.getfriends');
+
+Route::get('/get-user-by-friend/{id}', [UserController::class, 'fetchUserByFriend'])->name('friend.getuser');
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------
@@ -65,4 +72,22 @@ Route::get('/get-user-by-image/{id}', [UserController::class, 'fetchUserByImage'
 Route::get('/get-company-by-member', [MemberController::class, 'getCompanyByMember'])->name('member.company');
 
 Route::get('/get-device-by-member', [MemberController::class, 'getDeviceByMember'])->name('data.get');
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: JOINING ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Route::get('/user-join-image', [UserController::class, 'userJoinImage'])->name('user.jointest');
+
+Route::get('/user-join-profile', [UserController::class, 'userJoinProfile'])->name('user.joinprofile');
+
+Route::get('/user-join-phone', [UserController::class, 'userJoinPhone'])->name('user.joinphone');
+
+Route::get('/phone-join-operator', [UserController::class, 'phoneJoinOperator'])->name('phone.joinoperator');
+
+Route::get('/user-join-phone-join-operator', [UserController::class, 'userJoinPhoneJoinOperator'])->name('user.joinphoneoperator'); // 3 table joining
+
+Route::get('/user-join-two', [UserController::class, 'userJoinTwo'])->name('user.jointwo');
+
+
 
