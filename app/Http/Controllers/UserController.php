@@ -11,19 +11,22 @@ use App\Models\Image;
 use App\Models\Friend;
 use App\Models\Profile;
 
+
 class UserController extends Controller
 {
     //
     public function insertRecord()
     {
         $phone = new Phone();
-        $phone->phone = "01881881881";
+        $phone->phone = "01844444444";
         $user = new User();
-        $user->name = "Tavu Saha";
-        $user->email = "tavu.s@gmail.com";
+        $user->name = "Test User 2";
+        $user->email = "test2@gmail.com";
         $user->password = encrypt('123456789');
         $user->save();
         $user->phone()->save($phone);
+        $roleids = [1, 3, 5];
+        $user->roles()->attach($roleids);
         return "Record has been created successfully!!";
     }
 
@@ -155,4 +158,36 @@ class UserController extends Controller
 
         return $user;
     }
+
+    public function userJoinDevice()
+    {
+        $user = User::join('devices', 'devices.member_id', '=', 'users.id')
+        ->get(['devices.name', 'users.id', 'users.email']);
+
+        return $user;
+    }
+
+    public function crossJoin() //cross join - one row is connected with each rows of another
+    {
+        $user = User::crossJoin('phones')
+        ->select('users.name as User_name', 'phones.phone as Contact')
+        ->get();
+
+        return $user;
+    }
+
+    public function advancedJoin() //advanced join - It can be join two tables using a function
+    {
+        $user = User::join('phones', function($join){
+            $join->on('users.id', '=', 'phones.user_id');
+        })
+        ->select('users.name as Name', 'phones.phone as Mobile')
+        ->get();
+
+        return $user;
+    }
+
+
+
+
 }

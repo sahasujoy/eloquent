@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add Post</title>
+    <title>Edit Category</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
@@ -15,23 +15,24 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="card">
                         <div class="card-header">
-                            Edit Post
+                            Edit Category
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('post.update') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $post->id }}">
-                                <div class="form-group">
-                                    <label for="title">Post Title</label>
-                                    <input type="text" name="title" class="form-control" value="{{ $post->title }}" />
+                            {{-- @if (Session::has('category_edited'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ Session::get('category_edited') }}
                                 </div>
+                            @endif --}}
+                            <form action="{{ route('category.update') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $category->id }}">
                                 <div class="form-group">
-                                    <label for="description">Post Description</label>
-                                    <textarea name="body" class="form-control" rows="3" value="">{{ $post->body }}</textarea>
+                                    <label for="title">Category Title</label>
+                                    <input type="text" name="title" class="form-control" value="{{ $category->name }}" />
                                 </div>
                                 <br>
                                 <div>
-                                    <button type="submit" class="btn btn-success">Edit Post</button>
+                                    <button type="submit" class="btn btn-success">Edit Category</button>
                                 </div>
                             </form>
                         </div>

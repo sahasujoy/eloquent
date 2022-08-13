@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add Post</title>
+    <title>All Category</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
@@ -15,43 +15,41 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="card">
                         <div class="card-header">
-                            All Post
-                            <a href="{{ route('post.add') }}">Add Post</a>
+                            All Category
+                            <a href="{{ route('category.add') }}">Add Category</a>
                         </div>
 
                         <div class="card-body">
-                            @if (Session::has('post_deleted'))
-                                <div class="alert alert-danger" role="alert">
-                                    {{ Session::get('post_deleted') }}
-                                </div>
-                            @elseif (Session::has('post_edited'))
+                            @if (Session::has('category_deleted'))
                                 <div class="alert alert-success" role="alert">
-                                    {{ Session::get('post_edited') }}
+                                    {{ Session::get('category_deleted') }}
                                 </div>
-                            @elseif (Session::has('Post_Created'))
+                            @elseif (Session::has('category_edited'))
                                 <div class="alert alert-success" role="alert">
-                                    {{ Session::get('Post_Created') }}
+                                    {{ Session::get('category_edited') }}
+                                </div>
+                            @elseif (Session::has('Category_Created'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ Session::get('Category_Created') }}
                                 </div>
                             @endif
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Post Title</th>
-                                        <th>Post Description</th>
+                                        <th>Category Title</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($post as $postitem)
+                                    @foreach ($category as $catitem)
                                         <tr>
-                                            <td>{{ $postitem->id }}</td>
-                                            <td>{{ $postitem->title }}</td>
-                                            <td>{{ $postitem->body }}</td>
+                                            <td>{{ $catitem->id }}</td>
+                                            <td>{{ $catitem->name }}</td>
                                             <td>
-                                                <a href="{{ route('post.getbyid', ['id'=>$postitem->id]) }}" class="btn btn-success">Details</a>
-                                                <a href="{{ route('post.delete',$postitem->id) }}" class="btn btn-danger">Delete</a>
-                                                <a href="{{ route('post.edit', ['id'=>$postitem->id]) }}" class="btn btn-info">Edit</a>
+                                                <a href="{{ route('category.getbyid', ['id'=>$catitem->id]) }}" class="btn btn-success">Details</a>
+                                                <a href="{{ route('category.delete', ['id'=>$catitem->id]) }}" class="btn btn-danger">Delete</a>
+                                                <a href="{{ route('category.edit', ['id'=>$catitem->id]) }}" class="btn btn-info">Edit</a>
                                             </td>
                                         </tr>
                                     @endforeach

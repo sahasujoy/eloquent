@@ -15,23 +15,23 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="card">
                         <div class="card-header">
-                            Edit Post
+                            Add Category
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('post.update') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $post->id }}">
-                                <div class="form-group">
-                                    <label for="title">Post Title</label>
-                                    <input type="text" name="title" class="form-control" value="{{ $post->title }}" />
+                            {{-- @if (Session::has('Category_Created'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ Session::get('Category_Created') }}
                                 </div>
+                            @endif --}}
+                            <form action="{{ route('category.create') }}" method="POST">
+                                @csrf
                                 <div class="form-group">
-                                    <label for="description">Post Description</label>
-                                    <textarea name="body" class="form-control" rows="3" value="">{{ $post->body }}</textarea>
+                                    <label for="title">Category Title</label>
+                                    <input type="text" name="title" class="form-control" placeholder="Enter the category title" />
                                 </div>
                                 <br>
                                 <div>
-                                    <button type="submit" class="btn btn-success">Edit Post</button>
+                                    <button type="submit" class="btn btn-success">Add Category</button>
                                 </div>
                             </form>
                         </div>
@@ -46,4 +46,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
-

@@ -73,4 +73,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Friend');
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_users');
+    }
 }

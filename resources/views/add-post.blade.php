@@ -18,13 +18,14 @@
                             Add Post
                         </div>
                         <div class="card-body">
-                            @if (Session::has('Post_Created'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ Session::get('Post_Created') }}
-                                </div>
-                            @endif
                             <form action="{{ route('post.create') }}" method="POST">
                                 @csrf
+                                <label><strong>Select Category :</strong></label><br/>
+                                <select class="form-control" name="cat[]" multiple="">
+                                @foreach ($category as $cateitem)
+                                    <option value="{{ $cateitem->id }}">{{ $cateitem->name }}</option>
+                                @endforeach
+                                </select>
                                 <div class="form-group">
                                     <label for="title">Post Title</label>
                                     <input type="text" name="title" class="form-control" placeholder="Enter the post title" />
